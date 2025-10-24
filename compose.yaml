@@ -1,0 +1,16 @@
+services:
+  flask-app:
+    build: .
+    ports:
+      - "8080:5000" # Map host port 8080 to container port 5000
+    depends_on:
+      - redis-server # Ensures redis starts first
+    environment:
+      - FLASK_ENV=development
+      - PYTHONUNBUFFERED=1 # Shows print statements immediately
+
+  redis-server:
+    image: "redis:latest"
+    # Optional: uncomment below if you want to access redis directly from your host
+    # ports:
+    #   - "6379:6379"
